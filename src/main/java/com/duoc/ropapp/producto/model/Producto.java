@@ -2,7 +2,14 @@ package com.duoc.ropapp.producto.model;
 
 import com.duoc.ropapp.pedido.model.Pedido;
 import com.duoc.ropapp.sucursal.model.Sucursal;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Producto {
@@ -11,6 +18,7 @@ public class Producto {
     private int id;
     private String nombre;
     private String descripcion;
+    @JsonIgnoreProperties("productos")
     @ManyToOne
     @JoinColumn(name = "sucursal_id", nullable = false)
     private Sucursal sucursal;

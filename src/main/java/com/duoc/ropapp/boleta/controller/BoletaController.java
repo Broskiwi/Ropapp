@@ -1,15 +1,22 @@
 package com.duoc.ropapp.boleta.controller;
 
-import com.duoc.ropapp.boleta.model.Boleta;
-import com.duoc.ropapp.boleta.service.BoletaService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.duoc.ropapp.boleta.model.Boleta;
+import com.duoc.ropapp.boleta.service.BoletaService;
+
 @RestController
-@RequestMapping("/api/pedido")
+@RequestMapping("/api/boleta")
 public class BoletaController {
 
     private final BoletaService boletaService;
