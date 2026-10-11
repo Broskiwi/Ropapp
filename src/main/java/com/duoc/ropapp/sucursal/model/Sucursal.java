@@ -1,9 +1,14 @@
 package com.duoc.ropapp.sucursal.model;
 
-import com.duoc.ropapp.producto.model.Producto;
-import jakarta.persistence.*;
-
 import java.util.List;
+
+import com.duoc.ropapp.producto.model.Producto;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Sucursal {
@@ -17,12 +22,6 @@ public class Sucursal {
     List<Producto> productos;
 
     public Sucursal() {
-    }
-
-    public Sucursal(String nombre, String direccion, String ciudad, List<Producto> productos) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.ciudad = ciudad;
     }
 
     public int getId() {
@@ -59,5 +58,9 @@ public class Sucursal {
 
     public List<Producto> getProductos() {
         return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
