@@ -35,6 +35,11 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.save(producto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody Producto producto) {
+        return ResponseEntity.ok(productoService.updateProducto(producto, id));
+    }
+    
     @DeleteMapping("/{id}")
     public int delete(@PathVariable Integer id) {
         Optional<Producto> producto = productoService.findById(id);

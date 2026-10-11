@@ -31,16 +31,21 @@ public class SucursalController {
         }}
 
     @PostMapping
-    public ResponseEntity<Sucursal> save(@RequestBody Sucursal producto) {
-        return ResponseEntity.ok(sucursalService.save(producto));
+    public ResponseEntity<Sucursal> save(@RequestBody Sucursal sucursal) {
+        return ResponseEntity.ok(sucursalService.save(sucursal));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Sucursal> update(@PathVariable Integer id, @RequestBody Sucursal sucursal) {
+        return ResponseEntity.ok(sucursalService.updateSucursal(sucursal, id));
     }
 
     @DeleteMapping("/{id}")
     public int delete(@PathVariable Integer id) {
-        Optional<Sucursal> producto = sucursalService.findById(id);
-        if  (producto.isPresent()) {
+        Optional<Sucursal> sucursal = sucursalService.findById(id);
+        if  (sucursal.isPresent()) {
             sucursalService.deleteById(id);
-            return producto.get().getId();
+            return sucursal.get().getId();
         } else {
             return -1;
         }
