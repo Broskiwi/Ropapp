@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duoc.ropapp.producto.model.Producto;
+import com.duoc.ropapp.producto.model.ProductoDTO;
 import com.duoc.ropapp.producto.service.ProductoService;
 
 @RestController
@@ -44,7 +45,8 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody Producto producto) {
+    public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody ProductoDTO producto) {
+        producto.setId(id);
         return ResponseEntity.ok(productoService.updateProducto(producto, id));
     }
     
