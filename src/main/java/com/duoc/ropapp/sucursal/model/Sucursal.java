@@ -13,7 +13,7 @@ public class Sucursal {
     private String nombre;
     private String direccion;
     private String ciudad;
-    @OneToMany(mappedBy = "sucursal")
+    @OneToMany(mappedBy = "sucursal_ref")
     List<Producto> productos;
 
     public Sucursal() {
@@ -23,6 +23,7 @@ public class Sucursal {
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
+        this.productos = productos;
     }
 
     public int getId() {

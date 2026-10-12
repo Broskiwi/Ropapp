@@ -11,9 +11,11 @@ public class Producto {
     private int id;
     private String nombre;
     private String descripcion;
+    @Transient
+    private int sucursal;
     @ManyToOne
     @JoinColumn(name = "sucursal_id", nullable = false)
-    private Sucursal sucursal;
+    private Sucursal sucursal_ref;
     @ManyToOne
     @JoinColumn(name = "pedidos")
     private Pedido pedido;
@@ -21,7 +23,7 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, Sucursal sucursal) {
+    public Producto(String nombre, String descripcion, int sucursal) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.sucursal = sucursal;
@@ -51,11 +53,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Sucursal getSucursal() {
+    public int getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setSucursal(Sucursal sucursal_ref) {
+        this.sucursal_ref = sucursal_ref;
     }
 }

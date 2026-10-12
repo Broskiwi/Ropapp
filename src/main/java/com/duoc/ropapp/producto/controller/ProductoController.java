@@ -1,7 +1,10 @@
 package com.duoc.ropapp.producto.controller;
 
 import com.duoc.ropapp.producto.model.Producto;
+import com.duoc.ropapp.producto.model.ProductoDTO;
 import com.duoc.ropapp.producto.service.ProductoService;
+import com.duoc.ropapp.sucursal.model.Sucursal;
+import com.duoc.ropapp.sucursal.service.SucursalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +16,10 @@ import java.util.Optional;
 public class ProductoController {
 
     private final ProductoService productoService;
-    public ProductoController(ProductoService productoService) {
+    private final SucursalService sucursalService;
+    public ProductoController(ProductoService productoService, SucursalService sucursalService) {
         this.productoService = productoService;
+        this.sucursalService = sucursalService;
     }
 
     @GetMapping
@@ -32,14 +37,29 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<Producto> save(@RequestBody Producto producto) {
+        Optional<Sucursal> optionalSucursal = sucursalService.findById(producto.getSucursal());
+        if(optionalSucursal.isPresent()) {
+            producto.setSucursal(optionalSucursal.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(productoService.save(producto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody Producto producto) {
-        return ResponseEntity.ok(productoService.updateProducto(producto, id));
+    public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody ProductoDTO producto) {
+        producto.setId(id);
+        if (producto.getSucursalRef() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Optional<Sucursal> optionalSucursal = sucursalService.findById(producto.getSucursalRef());
+        if(optionalSucursal.isPresent()) {
+            return ResponseEntity.ok(productoService.updateProducto(producto, id));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    
+
     @DeleteMapping("/{id}")
     public int delete(@PathVariable Integer id) {
         Optional<Producto> producto = productoService.findById(id);

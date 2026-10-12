@@ -1,6 +1,7 @@
 package com.duoc.ropapp.producto.service;
 
 import com.duoc.ropapp.producto.model.Producto;
+import com.duoc.ropapp.producto.model.ProductoDTO;
 import com.duoc.ropapp.producto.repository.ProductoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    public Producto updateProducto(Producto producto, Integer id) {
+    public Producto updateProducto(ProductoDTO producto, Integer id) {
         Optional<Producto> ogProducto = productoRepository.findById(id);
         if(ogProducto.isEmpty()){
             throw new EntityNotFoundException("Producto not found");

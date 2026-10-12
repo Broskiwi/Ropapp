@@ -37,6 +37,7 @@ public class SucursalController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Sucursal> update(@PathVariable Integer id, @RequestBody Sucursal sucursal) {
+        sucursal.setId(id);
         return ResponseEntity.ok(sucursalService.updateSucursal(sucursal, id));
     }
 
